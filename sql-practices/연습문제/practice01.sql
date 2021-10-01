@@ -24,7 +24,7 @@ group by gender;
 
 -- 문제4. 
 -- 현재 근무하고 있는 직원 수는 몇 명입니까? (salaries 테이블을 사용합니다.) 
-select count(distinct emp_no) as '현재 근무 직원 수'
+select count(emp_no) as '현재 근무 직원 수'
 from salaries
 where to_date = '9999-01-01';
 
@@ -46,7 +46,7 @@ select dept_name as '부서이름' from departments order by length(dept_name) d
 
 -- 문제8. 
 -- 현재 급여가 120,000이상 받는 사원은 몇 명이나 있습니까?
-select count(distinct emp_no) as '사원 수' from salaries where salary >= 120000 and to_date='9999-01-01';
+select count(emp_no) as '사원 수' from salaries where salary >= 120000 and to_date='9999-01-01';
 
 
 -- 문제9. 
