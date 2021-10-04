@@ -58,7 +58,7 @@ order by Name asc;
 
 -- 문제7.
 -- 현재, 직책이 Engineer인 사원 중에서 현재 급여가 40000 이상인 사원을 급여가 큰 순서대로 출력하세요.
-select s.emp_no as '사원번호', s.salary as '현재 급여'
+select e.emp_no as '사원번호', s.salary as '현재 급여'
 from employees e
 	join titles t on e.emp_no=t.emp_no and t.to_date='9999-01-01'
 	join salaries s on t.emp_no=s.emp_no and s.to_date='9999-01-01'
