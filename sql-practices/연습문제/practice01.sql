@@ -56,13 +56,23 @@ select distinct title as '직책' from titles order by length(title) desc;
 
 -- 문제10. 
 -- 현재 Enginner 직책의 사원은 총 몇 명입니까?
+-- 풀이1
 select title as '직책', count(title) as '사원수' 
 from titles 
-where to_date='9999-01-01' 
+where to_date='9999-01-01'
 group by title 
 having title='Engineer';
+
+-- 풀이2
+select count(*) as '엔지니어 수'
+from titles
+where to_date='9999-01-01' and title='Engineer';
 
 
 -- 문제11. 
 -- 사번이 13250(Zeydy)인 지원이 직책 변경 상황을 시간순으로 출력해보세요.
-select title as '직책', concat(from_date, ' ~ ', if(to_date='9999-01-01', '근무 중', to_date)) as '해당 직책 근무 날짜' from titles where emp_no=13250 order by to_date asc;
+select title as '직책', 
+		concat(from_date, ' ~ ', if(to_date='9999-01-01', '근무 중', to_date)) as '해당 직책 근무 날짜'
+from titles 
+where emp_no=13250 
+order by to_date asc;
