@@ -27,9 +27,9 @@ order by Name asc;
 -- 전체 사원의 사번, 이름, 연봉, 직책, 부서를 모두 이름 순서로 출력합니다.
 select e.emp_no as '사번', concat(e.first_name, ' ', e.last_name) as Name, s.salary as '연봉', t.title as '직책', d.dept_name as '부서'
 from employees e
-	join salaries s on e.emp_no=s.emp_no and s.to_date='9999-01-01'
-	join titles t on e.emp_no=t.emp_no and t.to_date='9999-01-01'
-    join dept_emp de on e.emp_no=de.emp_no and de.to_date='9999-01-01'
+	join salaries s on e.emp_no=s.emp_no
+	join titles t on e.emp_no=t.emp_no
+    join dept_emp de on e.emp_no=de.emp_no
     join departments d on de.dept_no=d.dept_no
 order by Name asc;
 
@@ -70,17 +70,13 @@ order by s.salary desc;
 -- 현재 급여가 50000이 넘는 직책을 직책, 급여로 급여가 큰 순서대로 출력하시오
 -- 풀이1) 현재 급여가 50000이 넘는 사원의 직책과 급여 출력(현재 급여 50000이 넘는 것 모두 출력)
 select t.title as '직책', s.salary as '현재 급여'
-from employees e
-	join titles t on e.emp_no=t.emp_no and t.to_date='9999-01-01' 
-	join salaries s on e.emp_no=s.emp_no and s.to_date='9999-01-01'
+from titles t join salaries s on t.emp_no=s.emp_no and s.to_date='9999-01-01'
 where s.salary > 50000
 order by s.salary desc;
 
 -- 풀이2) 급여가 50000이 넘는 직책 중 가장 높은 급여를 받는 사원의 직책, 급여 출력(직책에서 현재 급여가 가장 높은 것을 출력)
 select t.title as '직책', max(s.salary) as '현재 급여'
-from employees e
-	join titles t on e.emp_no=t.emp_no and t.to_date='9999-01-01' 
-	join salaries s on e.emp_no=s.emp_no and s.to_date='9999-01-01'
+from titles t join salaries s on t.emp_no=s.emp_no and s.to_date='9999-01-01'
 where s.salary > 50000
 group by t.title
 order by max(s.salary) desc;

@@ -41,7 +41,7 @@ select count(dept_no) as '매니저 수' from dept_manager where to_date = '9999
 
 -- 문제7. 
 -- 전체 부서를 출력하려고 합니다. 순서는 부서이름이 긴 순서대로 출력해 보세요.
-select dept_name as '부서이름' from departments order by length(dept_name) desc;
+select dept_name as '부서이름' from departments order by char_length(dept_name) desc;
 
 
 -- 문제8. 
@@ -51,7 +51,7 @@ select count(emp_no) as '사원 수' from salaries where salary >= 120000 and to
 
 -- 문제9. 
 -- 어떤 직책들이 있나요? 중복 없이 이름이 긴 순서대로 출력해 보세요.
-select distinct title as '직책' from titles order by length(title) desc;
+select distinct title as '직책' from titles order by char_length(title) desc;
 
 
 -- 문제10. 
