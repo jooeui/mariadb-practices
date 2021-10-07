@@ -6,7 +6,7 @@ import bookshop.vo.BookVo;
 public class BookDaoTest {
 
 	public static void main(String[] args) {
-		insertTest();
+		// insertTest();
 	}
 
 	private static void insertTest() {
