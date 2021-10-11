@@ -8,10 +8,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import bookmall.vo.BookVo;
+import bookmall.vo.MemberVo;
 
-public class BookDao {
-	public boolean insert(BookVo vo) {
+
+public class MemberDao {
+	public boolean insert(MemberVo vo) {
 		boolean result = false;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -20,13 +21,14 @@ public class BookDao {
 			conn = getConnection();
 			
 			// 3. SQL 준비
-			String sql = "insert into book values(null, ?, ?, ?)";
+			String sql = "insert into member values(null, ?, ?, ?, ?)";
 			pstmt = conn.prepareStatement(sql);
 			
 			// 4. 바인딩(binding)
-			pstmt.setString(1, vo.getTitle());
-			pstmt.setLong(2, vo.getPrice());
-			pstmt.setLong(3, vo.getCategoryNo());
+			pstmt.setString(1, vo.getName());
+			pstmt.setString(2, vo.getPhone());
+			pstmt.setString(3, vo.getEmail());
+			pstmt.setString(4, vo.getPassword());
 			
 			
 			// 5. SQL 실행
@@ -51,8 +53,8 @@ public class BookDao {
 		return result;
 	}
 	
-	public List<BookVo> findAll() {
-		List<BookVo> result = new ArrayList<>();
+	public List<MemberVo> findAll() {
+		List<MemberVo> result = new ArrayList<>();
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -62,9 +64,8 @@ public class BookDao {
 			conn = getConnection();
 			
 			// 3. SQL 준비
-			String sql = "select b.no, b.title, b.price, c.category " + 
-						" from book b, category c " + 
-						" where b.category_no=c.no " + 
+			String sql = "select no, name, phone, email " + 
+						" from member " + 
 						" order by no desc ";
 			pstmt = conn.prepareStatement(sql);
 			
@@ -75,15 +76,15 @@ public class BookDao {
 			
 			while(rs.next()) {
 				Long no = rs.getLong(1);
-				String title = rs.getString(2);
-				Long price = rs.getLong(3);
-				String category = rs.getString(4);
+				String name = rs.getString(2);
+				String phone = rs.getString(3);
+				String email = rs.getString(4);
 				
-				BookVo vo = new BookVo();
+				MemberVo vo = new MemberVo();
 				vo.setNo(no);
-				vo.setTitle(title);
-				vo.setPrice(price);
-				vo.setCategory(category);
+				vo.setName(name);
+				vo.setPhone(phone);
+				vo.setEmail(email);
 				
 				result.add(vo);
 			}
@@ -104,44 +105,6 @@ public class BookDao {
 		}
 		
 		return result;
-	}
-	
-	public Long getOBPrice(Long no, Long amount) {
-		Connection conn = null;
-		Long price = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try {
-			conn = getConnection();
-			
-			String sql = "select price*? as OBPrice from book where no=?";
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setLong(1, amount);
-			pstmt.setLong(2, no);
-			
-			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
-				price = rs.getLong(1);
-			}
-		} catch (SQLException e) {
-			System.out.println("error: " + e);
-		} finally {
-			// clean up
-			try {
-				if (pstmt != null) {
-					pstmt.close();
-				}
-				if (conn != null) {
-					conn.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		return price;
 	}
 	
 	private Connection getConnection() throws SQLException {
