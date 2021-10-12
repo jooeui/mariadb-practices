@@ -47,9 +47,10 @@ public class OrderDao {
 				pstmt.setLong(3, obVO.getAmount());
 				pstmt.setLong(4, obVO.getPrice());
 				totalPrice += obVO.getPrice();
-				
-				pstmt.executeUpdate();
+				pstmt.addBatch();
+				pstmt.clearParameters();
 			}
+			pstmt.executeBatch();
 			
 			
 			
@@ -91,9 +92,10 @@ public class OrderDao {
 		try {
 			conn = getConnection();
 
-			String sql = "select o.no, o.order_no, concat(m.name, '/', m.email) as orderer, o.order_price, o.addr " + 
+			String sql = "select o.no, o.order_no, concat(m.name, ' / ', m.email) as orderer, o.order_price, o.addr " + 
 						" from `order` o, member m " + 
-						" where o.member_no = m.no ";
+						" where o.member_no = m.no " +
+						" order by o.no asc";
 			String sql2 = "select ob.book_no, b.title, ob.amount, ob.price " + 
 						 " from order_book ob, `order` o, book b " + " where ob.book_no = b.no " + 
 						 "	and ob.order_no = o.no" + 

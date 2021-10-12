@@ -12,10 +12,11 @@ import bookmall.vo.OrderVo;
 public class OrderDaoTest {
 
 	public static void main(String[] args) {
-		
 //		insertTest();
 		
-		System.out.println("======================= 주문 목록 ============================");
+		System.out.println("─ 주문 목록 ─────────────────────────────────────────────────────────────────────────────────────────────────────\n");
+		System.out.println(" 번호 │\t      주문번호\t   │\t       주문자(이름/이메일)\t\t│      결제금액\t  │\t    배송지");
+		System.out.println(" ────────────────────────────────────────────────────────────────────────────────────────────────────────────");
 		findAllTest();
 		
 	}
@@ -28,25 +29,26 @@ public class OrderDaoTest {
 	}
 
 	private static void insertTest() {
+		OrderVo vo = null;
+		OrderBookVo obVO = null;
+		OrderDao dao = new OrderDao();
 		List<OrderBookVo> orderBookList = new ArrayList<>();
 		
-		OrderBookVo obVO = new OrderBookVo();
-		obVO.setBookNo(1L);
-		obVO.setAmount(1L);
+		obVO = new OrderBookVo();
+		obVO.setBookNo(2L);
+		obVO.setAmount(3L);
 		obVO.setPrice(new BookDao().getOBPrice(obVO.getBookNo(), obVO.getAmount()));
 		orderBookList.add(obVO);
 		
 		obVO = new OrderBookVo();
 		obVO.setBookNo(3L);
-		obVO.setAmount(2L);
+		obVO.setAmount(5L);
 		obVO.setPrice(new BookDao().getOBPrice(obVO.getBookNo(), obVO.getAmount()));
 		orderBookList.add(obVO);
 		
-		OrderVo vo = new OrderVo();
-		OrderDao dao = new OrderDao();
-
-		vo.setAddress("부산");
-		vo.setMemberNo(3L);
+		vo = new OrderVo();
+		vo.setAddress("서울");
+		vo.setMemberNo(1L);
 		vo.setOrderBookList(orderBookList);
 		dao.insert(vo);
 	}

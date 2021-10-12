@@ -42,7 +42,14 @@ public class BookVo {
 	}
 	@Override
 	public String toString() {
-		return "[" + no + "] 제목: " + title + ", 가격: " + price + "원, 카테고리: " + category;
+		String lResult = "    " + no + "\t│\t";
+		String rResult = "\t │\t" + price + "원\t   │\t" + category;
+		String result = lResult + title + rResult;
+		
+		if(getTitle().length() < 10) {
+			result = lResult + "\t" + title + "\t" + rResult;
+		}
+		return result;
 	}
 	
 }

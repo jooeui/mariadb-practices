@@ -55,8 +55,16 @@ public class OrderVo {
 	}
 	@Override
 	public String toString() {
-		return "[" + no + "] 주문번호: " + orderNo + ", 주문자: " + orderer + ", 결제금액: " + orderPrice + ", 주소: " + address + "\n"
-				+ "    상세내역 " + orderBookList;
+		String list = "";
+		for(int i=0; i<orderBookList.size(); i++) {
+			list += orderBookList.get(i);
+		}
+		return "  " + no + "  │\t  " + orderNo + "\t   │\t" + orderer + "\t│     " + orderPrice + "원\t  │\t" + address
+				+ "\n     -----------------------------------------------------------------------------------------------\n"
+				+ "\t      책번호\t\t \t제목\t\t \t수량\t \t금액"
+				+ "\n     -----------------------------------------------------------------------------------------------"
+				+ list
+				+ "\n ─────────────────────────────────────────────────────────────────────────────────────────────────────────────";
 	}
 	
 }

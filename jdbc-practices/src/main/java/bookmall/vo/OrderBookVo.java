@@ -32,6 +32,13 @@ public class OrderBookVo {
 	}
 	@Override
 	public String toString() {
-		return "(책 번호: " + bookNo + ", 제목: " + title + ", 수량: " + amount + ", 금액: " + price + ")";
+		String lResult = "\n\t\t" + bookNo + "\t\t";
+		String rResult = "\t\t" + amount + "개\t      " + price + "원";
+		String result = lResult + title + rResult;
+		
+		if(getTitle().length() < 10) {
+			result = lResult + "\t" + title + "\t" + rResult;
+		}
+		return result;
 	}
 }

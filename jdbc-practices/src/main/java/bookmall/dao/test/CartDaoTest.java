@@ -10,7 +10,9 @@ public class CartDaoTest {
 	public static void main(String[] args) {
 		// insertTest();
 		
-		System.out.println("======================= 카트 목록 ============================");
+		System.out.println("─ 카트 목록 ─────────────────────────────────────────────────────────────────────");
+		System.out.println("  이름\t│\t\t제목\t\t│\t수량\t │\t 금액");
+		System.out.println("──────────────────────────────────────────────────────────────────────────────");
 		findAllTest();
 	}
 	
@@ -22,14 +24,16 @@ public class CartDaoTest {
 	}
 
 	private static void insertTest() {
-		CartVo vo = new CartVo();
+		CartVo vo = null;
 		CartDao dao = new CartDao();
 		
+		vo = new CartVo();
 		vo.setMemberNo(2L);
 		vo.setBookNo(1L);
 		vo.setAmount(2L);
 		dao.insert(vo);
 		
+		vo = new CartVo();
 		vo.setMemberNo(1L);
 		vo.setBookNo(2L);
 		vo.setAmount(1L);

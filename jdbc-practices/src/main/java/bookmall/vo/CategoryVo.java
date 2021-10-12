@@ -17,7 +17,7 @@ public class CategoryVo {
 	}
 	@Override
 	public String toString() {
-		return "[" + no + "] " + category;
+		return"  " + no + "  │ " + category;
 	}
 	
 }

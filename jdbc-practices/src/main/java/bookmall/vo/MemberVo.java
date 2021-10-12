@@ -39,7 +39,7 @@ public class MemberVo {
 
 	@Override
 	public String toString() {
-		return "[" + no + "] 이름: " + name + ", 전화번호: " + phone + ", 이메일: " + email;
+		return "    " + no + "\t│\t" + name + "\t   │\t" + phone + "\t│\t" + email;
 	}
 	
 }

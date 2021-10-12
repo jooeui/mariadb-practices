@@ -5,12 +5,14 @@ import java.util.List;
 import bookmall.dao.CategoryDao;
 import bookmall.vo.CategoryVo;
 
-public class CategoryTest {
+public class CategoryDaoTest {
 
 	public static void main(String[] args) {
 		// insertTest();
 		
-		System.out.println("====== 카테고리 목록 ======");
+		System.out.println("─ 카테고리 목록 ──────");
+		System.out.println(" 번호 │   카테고리");
+		System.out.println("──────────────────");
 		findAllTest();
 	}
 
@@ -23,15 +25,18 @@ public class CategoryTest {
 	}
 
 	private static void insertTest() {
-		CategoryVo vo = new CategoryVo();
+		CategoryVo vo = null;
 		CategoryDao dao = new CategoryDao();
 		
-		vo.setCategory("컴퓨터/IT");
-		dao.insert(vo);
-
+		vo = new CategoryVo();
 		vo.setCategory("소설");
 		dao.insert(vo);
+
+		vo = new CategoryVo();
+		vo.setCategory("컴퓨터/IT");
+		dao.insert(vo);
 		
+		vo = new CategoryVo();
 		vo.setCategory("경제");
 		dao.insert(vo);
 	}

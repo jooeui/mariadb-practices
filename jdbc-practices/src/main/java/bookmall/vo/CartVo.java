@@ -46,7 +46,11 @@ public class CartVo {
 	}
 	@Override
 	public String toString() {
-		return "[" + name + "] 책 제목: " + title + ", 수량: " + amount + ", 가격: " + price;
+		if(getTitle().length() > 10) {
+			return " " + name + "\t│\t" + title + "\t│\t" + amount + "개\t │\t" + price + "원";
+		} else {
+			return " " + name + "\t│\t\t" + title + "\t\t│\t" + amount + "개\t │\t" + price + "원";
+		}
 	}
 	
 }

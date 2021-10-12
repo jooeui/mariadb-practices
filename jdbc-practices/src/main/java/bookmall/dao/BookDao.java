@@ -65,7 +65,7 @@ public class BookDao {
 			String sql = "select b.no, b.title, b.price, c.category " + 
 						" from book b, category c " + 
 						" where b.category_no=c.no " + 
-						" order by no desc ";
+						" order by no asc ";
 			pstmt = conn.prepareStatement(sql);
 			
 			// 4. 바인딩(binding)

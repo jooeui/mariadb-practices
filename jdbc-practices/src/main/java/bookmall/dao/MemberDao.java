@@ -66,7 +66,7 @@ public class MemberDao {
 			// 3. SQL 준비
 			String sql = "select no, name, phone, email " + 
 						" from member " + 
-						" order by no desc ";
+						" order by no asc ";
 			pstmt = conn.prepareStatement(sql);
 			
 			// 4. 바인딩(binding)
